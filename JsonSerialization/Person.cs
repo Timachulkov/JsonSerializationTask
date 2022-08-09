@@ -35,31 +35,5 @@ namespace JsonSerialization
 		Male,
 		Female
 	}
-	//internal class PersonGenerator : IGenerate
-	//{
-	//	readonly int personAmount = 0;
-	//	internal PersonGenerator(int count)
- //       {
-	//		personAmount = count;
-	//	}
- //       public void Generate(Person person)
- //       {
-			
-	//	}
- //   }
- //   class ChildGenerator : IGenerate
-	//{
- //       public void Generate(Child child)
- //       {
-           
- //       }
- //   }
- //   internal class JsonSerialaze
-	//{
-	//	List<T> valuesSerialized;
-	//	internal void JsonSerialaze (List<T> values)
-	//	{
-	//		valuesSerialized = values;
-	//	}
-	//}
+
 }

@@ -9,13 +9,38 @@ namespace JsonSerialization
     internal class PersonCreation : IGenerate
     {
         Random random = new Random();
+        int personNum = 10000;
 
-        public void Generate(Person person)
+        public Person[] Generate()
         {
-            var Id = Guid.NewGuid();
+            return NewPersons(personNum).ToArray();
+        }
+        private IEnumerable<Person> NewPersons(int personsNum)
+        {
+            for (int i = 0; i < personsNum; i++)
+            {
+                yield return GeneratePerson(i);
+            }
+        }
+
+        private Person GeneratePerson(int sequence)
+        {
+            var PersonId = Guid.NewGuid();
             return new Person()
             {
-
+                Id = PersonId.GetHashCode(),
+                TransportId = PersonId,
+                FirstName = $"{PersonId}",
+                LastName = $"{PersonId}",
+                SequenceId = sequence,
+                CreditCardNumbers = GenerateCreditCards(random.Next(10)).ToArray(),
+                Age = random.Next(100),
+                Phones = GeneratePhones(random.Next(10)).ToArray(),
+                BirthDate = (DateTime.UtcNow - TimeSpan.FromDays(random.Next(20 * 365, 100 * 365))).ToBinary(),
+                Salary = random.Next(10000, 100000),
+                IsMarred = random.NextDouble() > 0.5,
+                Gender = random.NextDouble() > 0.5 ? Gender.Female : Gender.Male,
+                Children = GenerateChildren(random.Next(3)).ToArray(),
             };
         }
         private IEnumerable<String> GenerateCreditCards(int creditCardsNum)
@@ -52,6 +77,7 @@ namespace JsonSerialization
                 var childId = Guid.NewGuid();
                 yield return new Child()
                 {
+                    Id =childId.GetHashCode(),
                     FirstName =$"{childId}",
                     LastName = $"{childId}",
                     BirthDate = (DateTime.UtcNow - TimeSpan.FromDays(random.Next(1 * 365, 18 * 365))).ToBinary(),
@@ -59,5 +85,7 @@ namespace JsonSerialization
                 };
             }
         }
+
+
     }
 }
