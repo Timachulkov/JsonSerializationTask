@@ -36,7 +36,7 @@ namespace JsonSerialization
                 CreditCardNumbers = GenerateCreditCards(random.Next(10)).ToArray(),
                 Age = random.Next(100),
                 Phones = GeneratePhones(random.Next(10)).ToArray(),
-                BirthDate = (DateTime.UtcNow - TimeSpan.FromDays(random.Next(20 * 365, 100 * 365))).ToBinary(),
+                BirthDate = ((DateTimeOffset)DateTime.UtcNow - TimeSpan.FromDays(random.Next(1 * 365, 18 * 365))).ToUnixTimeSeconds(),
                 Salary = random.Next(10000, 100000),
                 IsMarred = random.NextDouble() > 0.5,
                 Gender = random.NextDouble() > 0.5 ? Gender.Female : Gender.Male,
@@ -80,7 +80,7 @@ namespace JsonSerialization
                     Id =childId.GetHashCode(),
                     FirstName =$"{childId}",
                     LastName = $"{childId}",
-                    BirthDate = (DateTime.UtcNow - TimeSpan.FromDays(random.Next(1 * 365, 18 * 365))).ToBinary(),
+                    BirthDate = ((DateTimeOffset)DateTime.UtcNow - TimeSpan.FromDays(random.Next(1 * 365, 18 * 365))).ToUnixTimeSeconds(),
                     Gender = random.NextDouble() > 0.5 ? Gender.Female : Gender.Male
                 };
             }
